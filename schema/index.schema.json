@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orchestra/index.schema.json",
+  "title": "Orchestra manifest index",
+  "type": "object",
+  "required": ["index_schema", "generated", "manufacturers"],
+  "properties": {
+    "index_schema": { "type": "integer", "const": 1 },
+    "generated": { "type": "string" },
+    "repo": { "type": "string" },
+    "manufacturers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "devices"],
+        "properties": {
+          "slug": { "type": "string" },
+          "name": { "type": "string" },
+          "devices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "schema_version", "revision", "match", "transports", "url", "sha256"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "schema_version": { "type": "integer" },
+                "revision": { "type": "integer" },
+                "match": { "type": "object" },
+                "transports": { "type": "array", "items": { "type": "string" } },
+                "platforms": { "type": "array", "items": { "type": "string" } },
+                "counts": { "type": "object" },
+                "url": { "type": "string" },
+                "sha256": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

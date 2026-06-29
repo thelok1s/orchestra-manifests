@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orchestra/manifest.schema.json",
+  "title": "Orchestra device manifest v3",
+  "type": "object",
+  "required": ["schema_version", "revision", "id", "name", "manufacturer", "match", "channels", "default_channel", "functions"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 3 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "revision_date": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "manufacturer": { "type": "string" },
+    "model_code": { "type": "string" },
+    "re_model": { "type": "string" },
+    "match": {
+      "type": "object",
+      "properties": {
+        "name_regex": { "type": "string" },
+        "service_uuids_any": { "type": "array", "items": { "type": "string" } },
+        "model_name_prefix": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "channels": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["transport"],
+        "properties": {
+          "transport": { "type": "string", "enum": ["rfcomm", "ble_gatt", "aacp"] },
+          "uuid": { "type": "string" },
+          "secure": { "type": "boolean" },
+          "protocol": { "type": "object" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "default_channel": { "type": "string" },
+    "platforms": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "detect": { "type": "object" },
+          "requires": { "type": "array", "items": { "type": "string" } },
+          "inject": { "type": "object" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["multitoggle", "toggle", "list", "slider", "info"] },
+          "channel": { "type": "string" },
+          "_verified": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

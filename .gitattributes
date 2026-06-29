@@ -1,0 +1,5 @@
+# Manifests must be byte-identical on every platform so the app's OTA sha256 matches.
+*.json text eol=lf
+*.md text eol=lf
+*.mjs text eol=lf
+*.yml text eol=lf

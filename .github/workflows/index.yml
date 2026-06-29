@@ -1,0 +1,15 @@
+name: validate-and-index
+on:
+  push: { branches: [main] }
+  pull_request: {}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '24' }
+      - run: npm ci
+      - run: npm test
+      - name: Index is fresh (fails if a contributor forgot to regenerate)
+        run: npm run check

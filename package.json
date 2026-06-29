@@ -1,0 +1,15 @@
+{
+  "name": "orchestra-manifests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-index": "node tools/build-index.mjs",
+    "check": "node tools/build-index.mjs --check",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}
