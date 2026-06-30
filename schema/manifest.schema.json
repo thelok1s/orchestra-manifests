@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://orchestra/manifest.schema.json",
-  "title": "Orchestra device manifest v3",
+  "title": "Orchestra device manifest v3–v4",
   "type": "object",
   "required": ["schema_version", "revision", "id", "name", "manufacturer", "match", "channels", "default_channel", "functions"],
   "properties": {
