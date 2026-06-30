@@ -1,4 +1,4 @@
-# Orchestra device manifest schema (v3)
+# Orchestra device manifest schema (v3–v4)
 
 A device manifest is a JSON file that tells the Orchestra app (a) how to recognise a
 Bluetooth device, (b) which transport/protocol channel to open, (c) every capability the
@@ -6,13 +6,21 @@ device exposes and how to map it to a native Android preference, and (d) which R
 injection bindings to use when hooking the system UI. The app reads manifests at runtime
 from the cloud index (refreshed on a TTL) and from a local sideload if present.
 
+> **Supported schema_version range: [3, 4].** Manifests outside that range are ignored entirely.
+
 > **v3 vs v2.** v2 used a flat `transport`/`protocol` pair at device level. v3 replaces
 > them with a named `channels` map + `default_channel`, so a single manifest can declare
 > multiple transport/protocol bundles and individual functions can opt into a specific one.
 > v3 also adds a monotonic `revision` counter (bump on **any** content edit), a
-> `revision_date`, and an optional `platforms` block for per-ROM injection bindings. The
-> app enforces a supported schema_version range ([3, 3] as of this writing); manifests
-> outside that range are ignored entirely.
+> `revision_date`, and an optional `platforms` block for per-ROM injection bindings.
+
+> **v4 vs v3.** v4 introduces the `aacp` transport, driven by the app's `AacpEngine` using
+> `protocol.framing: "aap_v1"` (Apple Accessory Protocol over L2CAP). The channel may
+> declare a `psm` integer (e.g. `4097` = 0x1001) which is declarative metadata; the
+> actual PSM, UUID, and framing constants live inside `AacpEngine`. For `aacp` functions,
+> `read` uses a push model: the engine listens for inbound AAP notifications and the
+> manifest supplies `notify_opcode` + `value_map` (rather than a polled `command`) to
+> map the device-reported byte to an option id. All other v3 fields are unchanged.
 
 ---
 
@@ -20,7 +28,7 @@ from the cloud index (refreshed on a TTL) and from a local sideload if present.
 
 | field | type | req | meaning |
 |---|---|---|---|
-| `schema_version` | int | yes | Always `3`. App gate: only range [3,3] is loaded. |
+| `schema_version` | int | yes | `3` or `4`. App gate: only range [3,4] is loaded. |
 | `revision` | int | yes | Monotonic counter. Bump on **any** edit, including `_verified` flips. |
 | `revision_date` | string | no | ISO 8601 date of the last revision (`YYYY-MM-DD`). |
 | `id` | string | yes | Stable kebab-case slug; also the filename stem. |
@@ -73,14 +81,15 @@ A map of named channel objects. Each key is a short slug (e.g. `"rfcomm-main"`).
 
 | field | meaning |
 |---|---|
-| `transport` | `"rfcomm"` (active), `"ble_gatt"` or `"aacp"` (reserved slots, not yet driven). |
+| `transport` | `"rfcomm"` (active), `"aacp"` (active, v4+), `"ble_gatt"` (reserved). |
 | `uuid` | Service UUID for RFCOMM `createInsecureRfcommSocketToServiceRecord`. |
+| `psm` | L2CAP PSM for `aacp` channels (e.g. `4097` = 0x1001). Declarative; the engine holds the constant. |
 | `secure` | `false` = insecure RFCOMM (standard for Soundcore). |
 | `protocol` | Framing/codec descriptor. See below. |
 
 ### protocol (soundcore_v1)
 
-The only protocol currently implemented is `soundcore_v1`:
+The only RFCOMM protocol currently implemented is `soundcore_v1`:
 
 - **Framing**: host→device: `08 ee 00 00 00 <cmd:2> <len:2 LE total> <payload…> <crc>`;
   device→host: `09 ff 00 00 01 <cmd:2> <len:2 LE> <payload…> <crc>`.
@@ -88,9 +97,9 @@ The only protocol currently implemented is `soundcore_v1`:
 - **Checksum** (`sum8`): `sum(all preceding bytes) & 0xFF`.
 - `cmd_prefix` / `resp_prefix`: hex prefixes for the codec (`"08ee000000"` / `"09ff000001"`).
 
-Only `rfcomm` channels with `framing: soundcore_v1` are driven today. `ble_gatt` and `aacp`
-are reserved transport slots for future expansion; a function that names one of those channels
-will gracefully degrade (see [graceful degrade](#graceful-degrade)).
+`rfcomm` channels with `framing: soundcore_v1` and `aacp` channels with `framing: aap_v1`
+are both driven. `ble_gatt` is a reserved transport slot; a function that names a `ble_gatt`
+channel will gracefully degrade (see [graceful degrade](#graceful-degrade)).
 
 ---
 
@@ -191,9 +200,10 @@ heuristic you know is wrong.
 
 | field | meaning |
 |---|---|
-| `command` | Hex command id to send as a read request. |
+| `command` | Hex command id to send as a read request (polled transports). |
 | `response_command` | Hex command id to match in the device reply. |
-| `state_byte_index` | Byte offset in the full response packet holding the current value (`null` if unknown). |
+| `notify_opcode` | Hex opcode for push-notification transports (`aacp`). The engine matches inbound frames by this opcode. |
+| `state_byte_index` | Byte offset in the full response/notification packet holding the current value (`null` if unknown). |
 | `value_map` | Maps hex byte → option id or `on`/`off`. |
 
 ---
@@ -236,7 +246,7 @@ rest of the device's functions are unaffected:
 | `unsupported-surface` | The function's `ui.surfaces` contains a surface the active platform's `inject.surfaces` doesn't include. |
 | `unrenderable-type` | The `type` cannot be rendered as a native preference on the active platform (e.g. `list`, `slider` on Pixel). |
 
-The `schema_version` range check ([3, 3]) is the last-resort gate for structural breaks — a
+The `schema_version` range check ([3, 4]) is the last-resort gate for structural breaks — a
 manifest with an out-of-range version is dropped entirely, not partially.
 
 ---

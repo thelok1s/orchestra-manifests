@@ -5,7 +5,7 @@
   "type": "object",
   "required": ["schema_version", "revision", "id", "name", "manufacturer", "match", "channels", "default_channel", "functions"],
   "properties": {
-    "schema_version": { "type": "integer", "const": 3 },
+    "schema_version": { "type": "integer", "enum": [3, 4] },
     "revision": { "type": "integer", "minimum": 1 },
     "revision_date": { "type": "string" },
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
@@ -31,6 +31,7 @@
         "properties": {
           "transport": { "type": "string", "enum": ["rfcomm", "ble_gatt", "aacp"] },
           "uuid": { "type": "string" },
+          "psm": { "type": "integer" },
           "secure": { "type": "boolean" },
           "protocol": { "type": "object" }
         },
