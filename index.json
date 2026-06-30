@@ -1,6 +1,6 @@
 {
   "index_schema": 1,
-  "generated": "2026-06-30T10:13:36.875Z",
+  "generated": "2026-06-30T11:08:17.114Z",
   "repo": "orchestra-manifests",
   "manufacturers": [
     {
@@ -12,6 +12,7 @@
           "name": "Soundcore Liberty 4 Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Liberty 4 Pro",
           "match": {
             "name_regex": "(?i)soundcore Liberty 4 Pro",
             "service_uuids_any": [
@@ -37,6 +38,7 @@
           "name": "Soundcore Space One Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Space One Pro",
           "match": {
             "name_regex": "(?i)soundcore Space One Pro",
             "service_uuids_any": [
@@ -69,6 +71,7 @@
           "name": "AirPods Pro 2",
           "schema_version": 4,
           "revision": 1,
+          "name_regex": "(?i)airpods pro",
           "match": {
             "name_regex": "(?i)airpods pro",
             "service_uuids_any": [
