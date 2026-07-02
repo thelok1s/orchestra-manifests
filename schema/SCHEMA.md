@@ -160,6 +160,7 @@ Each function is one user-facing capability.
 | `range` | object | For `slider`: `{min, max, step, unit?}`. |
 | `feature` | string | For `level` (AAP only): hex feature byte (e.g. `"2E"`) written/read via the generic single-byte AAP feature frame. |
 | `min` / `max` / `step` | int | For `level`: flat bounds/step (distinct from `slider`'s nested `range`). |
+| `local` | bool | `true` when the control has no `set`/`read` protocol frame at all — handled entirely on-device (a behavior toggle gated by the SystemUI broker, e.g. `auto_pause`; or, for `text`, a plain local API call, e.g. `rename` via `BluetoothDevice.setAlias`). |
 | `set` | object | How to write the value. See [set](#set). |
 | `read` | object | How to read the current value. See [read](#read). |
 | `inject` | `"auto"` / `true` / `false` | Controls injectability. See [injectability](#type--injectability). |
@@ -179,6 +180,7 @@ Each function is one user-facing capability.
 | `list` | no native list pref in the configurable fragment | No (`no-native-list`) — in-app screen only. |
 | `slider` | no slider in the configurable fragment | No (`no-native-slider`) — in-app screen only. |
 | `level` | no slider in the configurable fragment | No (`no-native-slider`) — in-app screen only; AAP feature-byte control (e.g. AirPods adaptive-audio strength). |
+| `text` | no text input in the configurable fragment | No — in-app screen only; typically `local:true` (e.g. rename via `BluetoothDevice.setAlias`, no protocol frame). |
 | `info` | `FooterPreference` / read-only row | Display-only (`inject:false`). |
 
 `inject: "auto"` applies these rules automatically. Set `inject: false` (with
