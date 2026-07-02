@@ -158,6 +158,8 @@ Each function is one user-facing capability.
 | `capability` | string | OpenSCQ30 module name for provenance. |
 | `options[]` | array | For `multitoggle` / `list`: `{id, label, icon?, label_i18n?}`. |
 | `range` | object | For `slider`: `{min, max, step, unit?}`. |
+| `feature` | string | For `level` (AAP only): hex feature byte (e.g. `"2E"`) written/read via the generic single-byte AAP feature frame. |
+| `min` / `max` / `step` | int | For `level`: flat bounds/step (distinct from `slider`'s nested `range`). |
 | `set` | object | How to write the value. See [set](#set). |
 | `read` | object | How to read the current value. See [read](#read). |
 | `inject` | `"auto"` / `true` / `false` | Controls injectability. See [injectability](#type--injectability). |
@@ -176,6 +178,7 @@ Each function is one user-facing capability.
 | `toggle` | `ActionSwitchPreference` (Switch) | Yes. |
 | `list` | no native list pref in the configurable fragment | No (`no-native-list`) — in-app screen only. |
 | `slider` | no slider in the configurable fragment | No (`no-native-slider`) — in-app screen only. |
+| `level` | no slider in the configurable fragment | No (`no-native-slider`) — in-app screen only; AAP feature-byte control (e.g. AirPods adaptive-audio strength). |
 | `info` | `FooterPreference` / read-only row | Display-only (`inject:false`). |
 
 `inject: "auto"` applies these rules automatically. Set `inject: false` (with

@@ -58,7 +58,7 @@
         "required": ["id", "type"],
         "properties": {
           "id": { "type": "string" },
-          "type": { "type": "string", "enum": ["multitoggle", "toggle", "list", "slider", "info", "battery"] },
+          "type": { "type": "string", "enum": ["multitoggle", "toggle", "list", "slider", "level", "info", "battery"] },
           "channel": { "type": "string" },
           "_verified": { "type": "boolean" }
         },
