@@ -11,8 +11,9 @@ from the cloud index (refreshed on a TTL) and from a local sideload if present.
 > multiple transport/protocol bundles and individual functions can opt into a specific one.
 > v3 also adds a monotonic `revision` counter (bump on **any** content edit), a
 > `revision_date`, and an optional `platforms` block for per-ROM injection bindings. The
-> app enforces a supported schema_version range ([3, 3] as of this writing); manifests
-> outside that range are ignored entirely.
+> app enforces a supported schema_version range ([3, 4] as of this writing — v4 adds the
+> `battery`/`level`/`text` function types and in-app control surfaces); manifests outside
+> that range are ignored entirely.
 
 ---
 
@@ -20,7 +21,7 @@ from the cloud index (refreshed on a TTL) and from a local sideload if present.
 
 | field | type | req | meaning |
 |---|---|---|---|
-| `schema_version` | int | yes | Always `3`. App gate: only range [3,3] is loaded. |
+| `schema_version` | int | yes | `3` or `4`. App gate: only range [3,4] is loaded. |
 | `revision` | int | yes | Monotonic counter. Bump on **any** edit, including `_verified` flips. |
 | `revision_date` | string | no | ISO 8601 date of the last revision (`YYYY-MM-DD`). |
 | `id` | string | yes | Stable kebab-case slug; also the filename stem. |
@@ -184,6 +185,20 @@ heuristic you know is wrong.
 | `payload_template` | Hex with `{mode}` / `{value}` / `{state}` placeholders. |
 | `option_values` | Maps option id → substituted hex (for `multitoggle` / `list`). |
 | `state_values` | Maps `on` / `off` → hex (for `toggle`). |
+
+### Verbatim frames (`framing: "shokz_v1"`)
+
+Some protocols (e.g. Shokz `shokz_v1`) have multiple incompatible frame layouts that a single
+`(command, value)` descriptor can't reconstruct. Those manifests ship the **exact captured frame**
+per option/state and the app replays it verbatim (patching only a rolling seq byte + the fields below).
+
+| field | meaning |
+|---|---|
+| `frames` | Maps option id (`multitoggle`/`list`), `on`/`off` (`toggle`), or `action` (`info`) → full frame hex. |
+| `frame_template` | `slider`: base frame hex; the value is patched in at `value_offset`. |
+| `value_offset` | `slider`: byte offset of the u32-LE value to patch into `frame_template`. |
+| `value_size` | `slider`: value width in bytes (default 4). |
+| `host_mac_offset_off` | `toggle`: byte offset in the `off` frame where the 6-byte host Bluetooth MAC (on-wire order) is spliced (e.g. Shokz multipoint-disable). `-1`/absent = none. |
 
 ---
 

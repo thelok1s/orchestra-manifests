@@ -1,6 +1,6 @@
 {
   "index_schema": 1,
-  "generated": "2026-06-25T12:56:51.930Z",
+  "generated": "2026-07-06T22:45:12.919Z",
   "repo": "orchestra-manifests",
   "manufacturers": [
     {
@@ -57,6 +57,68 @@
           },
           "url": "manifests/anker-soundcore/soundcore-space-one-pro.json",
           "sha256": "07b163e86c3900825cab41a5408679de40b142b20183d624a1ce96bec03e15a9"
+        }
+      ]
+    },
+    {
+      "slug": "apple",
+      "name": "Apple",
+      "devices": [
+        {
+          "id": "airpods-pro-2",
+          "name": "AirPods Pro 2",
+          "schema_version": 4,
+          "revision": 9,
+          "match": {
+            "name_regex": "(?i)airpods pro",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 8,
+            "injectable": 4,
+            "verified": 8
+          },
+          "url": "manifests/apple/airpods-pro-2.json",
+          "sha256": "a5922fdb668fbf491a789f5519f236739e3e5575073ff3e00668bae2c5c2024b"
+        }
+      ]
+    },
+    {
+      "slug": "shokz",
+      "name": "Shokz",
+      "devices": [
+        {
+          "id": "shokz-openswim-pro",
+          "name": "Shokz OpenSwim Pro",
+          "schema_version": 3,
+          "revision": 2,
+          "match": {
+            "name_regex": "(?i)(OpenSwim Pro|Shokz.OpenSwim.Pro)",
+            "service_uuids_any": [
+              "00001101-0000-1000-8000-00805f9b34fb"
+            ],
+            "manufacturer_id": "0x0cac"
+          },
+          "transports": [
+            "rfcomm",
+            "aacp"
+          ],
+          "platforms": [
+            "pixelos"
+          ],
+          "counts": {
+            "capabilities": 11,
+            "injectable": 3,
+            "verified": 11
+          },
+          "url": "manifests/shokz/shokz-openswim-pro.json",
+          "sha256": "67b851e57888f18322472a2bc6799753714a3da1a2f2e47e57771ed5e6741772"
         }
       ]
     }
