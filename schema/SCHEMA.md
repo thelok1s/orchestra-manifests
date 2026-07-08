@@ -199,6 +199,20 @@ heuristic you know is wrong.
 | `option_values` | Maps option id → substituted hex (for `multitoggle` / `list`). |
 | `state_values` | Maps `on` / `off` → hex (for `toggle`). |
 
+### Verbatim frames (`framing: "shokz_v1"`)
+
+Some protocols (e.g. Shokz `shokz_v1`) have multiple incompatible frame layouts that a single
+`(command, value)` descriptor can't reconstruct. Those manifests ship the **exact captured frame**
+per option/state and the app replays it verbatim (patching only a rolling seq byte + the fields below).
+
+| field | meaning |
+|---|---|
+| `frames` | Maps option id (`multitoggle`/`list`), `on`/`off` (`toggle`), or `action` (`info`) → full frame hex. |
+| `frame_template` | `slider`: base frame hex; the value is patched in at `value_offset`. |
+| `value_offset` | `slider`: byte offset of the u32-LE value to patch into `frame_template`. |
+| `value_size` | `slider`: value width in bytes (default 4). |
+| `host_mac_offset_off` | `toggle`: byte offset in the `off` frame where the 6-byte host Bluetooth MAC (on-wire order) is spliced (e.g. Shokz multipoint-disable). `-1`/absent = none. |
+
 ---
 
 ## read
