@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "galaxy-buds-pro",
   "name": "Galaxy Buds Pro",
+  "device_type": "earbuds_2",
   "manufacturer": "Samsung",
   "model_code": "buds_pro",
   "re_model": "Buds Pro",

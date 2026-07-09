@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "airpods-4",
   "name": "AirPods 4",
+  "device_type": "earbuds_2",
   "manufacturer": "Apple",
   "model_code": "A3053",
   "match": {

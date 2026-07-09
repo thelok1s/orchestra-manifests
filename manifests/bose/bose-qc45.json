@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "bose-qc45",
   "name": "Bose QuietComfort 45",
+  "device_type": "headphones",
   "manufacturer": "Bose",
   "model_code": "qc45",
   "re_model": "QC45",

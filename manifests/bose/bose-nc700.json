@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "bose-nc700",
   "name": "Bose Noise Cancelling 700",
+  "device_type": "headphones",
   "manufacturer": "Bose",
   "model_code": "nc700",
   "re_model": "NC700",

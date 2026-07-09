@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "airpods-max",
   "name": "AirPods Max",
+  "device_type": "headphones",
   "manufacturer": "Apple",
   "model_code": "A2096",
   "match": {

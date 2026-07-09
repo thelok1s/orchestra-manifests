@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "airpods-pro",
   "name": "AirPods Pro",
+  "device_type": "earbuds_2",
   "manufacturer": "Apple",
   "model_code": "A2084",
   "match": {

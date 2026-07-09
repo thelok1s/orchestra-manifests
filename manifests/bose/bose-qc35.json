@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "bose-qc35",
   "name": "Bose QuietComfort 35",
+  "device_type": "headphones",
   "manufacturer": "Bose",
   "model_code": "qc35",
   "re_model": "QC35",

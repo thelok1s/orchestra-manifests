@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "airpods",
   "name": "AirPods (1st/2nd Gen)",
+  "device_type": "earbuds_2",
   "manufacturer": "Apple",
   "model_code": "A1523",
   "match": {

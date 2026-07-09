@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "galaxy-buds-live",
   "name": "Galaxy Buds Live",
+  "device_type": "earbuds_2",
   "manufacturer": "Samsung",
   "model_code": "buds_live",
   "re_model": "Buds Live",

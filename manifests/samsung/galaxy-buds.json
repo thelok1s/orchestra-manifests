@@ -4,6 +4,7 @@
   "revision_date": "2026-07-08",
   "id": "galaxy-buds",
   "name": "Galaxy Buds (2019)",
+  "device_type": "earbuds_2",
   "manufacturer": "Samsung",
   "model_code": "buds",
   "re_model": "Buds",
