@@ -16,7 +16,7 @@ test('buildIndex groups by manufacturer dir and digests devices', () => {
   const sop = anker.devices.find(d => d.id === 'soundcore-space-one-pro');
   assert.ok(sop, 'space one pro present');
   assert.equal(sop.schema_version, 3);
-  assert.equal(sop.revision, 1);
+  assert.equal(sop.revision, 2); // bumped when live-verified toggle read offsets were added (2026-07-10)
   assert.deepEqual(sop.transports, ['rfcomm']);
   assert.deepEqual(sop.platforms, ['pixelos']);
   assert.match(sop.sha256, /^[0-9a-f]{64}$/);
