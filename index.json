@@ -1,6 +1,6 @@
 {
   "index_schema": 1,
-  "generated": "2026-07-08T11:47:03.910Z",
+  "generated": "2026-07-08T21:58:32.247Z",
   "repo": "orchestra-manifests",
   "manufacturers": [
     {
@@ -12,6 +12,7 @@
           "name": "Soundcore Liberty 3 Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Liberty 3 Pro",
           "match": {
             "name_regex": "(?i)soundcore Liberty 3 Pro",
             "service_uuids_any": [
@@ -37,6 +38,7 @@
           "name": "Soundcore Liberty 4 Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Liberty 4 Pro",
           "match": {
             "name_regex": "(?i)soundcore Liberty 4 Pro",
             "service_uuids_any": [
@@ -62,6 +64,7 @@
           "name": "Soundcore Life Q30",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore (Life )?Q30",
           "match": {
             "name_regex": "(?i)soundcore (Life )?Q30",
             "service_uuids_any": [
@@ -87,6 +90,7 @@
           "name": "Soundcore Life Q35",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore (Life )?Q35",
           "match": {
             "name_regex": "(?i)soundcore (Life )?Q35",
             "service_uuids_any": [
@@ -112,6 +116,7 @@
           "name": "Soundcore Space A40",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Space A40",
           "match": {
             "name_regex": "(?i)soundcore Space A40",
             "service_uuids_any": [
@@ -137,6 +142,7 @@
           "name": "Soundcore Space One Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Space One Pro",
           "match": {
             "name_regex": "(?i)soundcore Space One Pro",
             "service_uuids_any": [
@@ -163,6 +169,7 @@
           "name": "Soundcore Space Q45",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)soundcore Space Q45",
           "match": {
             "name_regex": "(?i)soundcore Space Q45",
             "service_uuids_any": [
@@ -190,10 +197,107 @@
       "name": "Apple",
       "devices": [
         {
+          "id": "airpods-3",
+          "name": "AirPods 3",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods 3",
+          "match": {
+            "name_regex": "(?i)AirPods 3",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 4,
+            "injectable": 1,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods-3.json",
+          "sha256": "435fd98a6a4ad183360ad139758c7aa9cd31740ca309cf8cf219ef4c115b6850"
+        },
+        {
+          "id": "airpods-4-anc",
+          "name": "AirPods 4 (ANC)",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods 4 with Active Noise Cancellation",
+          "match": {
+            "name_regex": "(?i)AirPods 4 with Active Noise Cancellation",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 5,
+            "injectable": 2,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods-4-anc.json",
+          "sha256": "8c7c2140d7800211fc0173ffcf0e0f527b00322ffee4207cd9dc3665994bcd6a"
+        },
+        {
+          "id": "airpods-4",
+          "name": "AirPods 4",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods 4(?! with Active Noise Cancellation)",
+          "match": {
+            "name_regex": "(?i)AirPods 4(?! with Active Noise Cancellation)",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 4,
+            "injectable": 1,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods-4.json",
+          "sha256": "9120c82518fc8b550a961bea2d63dbb5f226336bbf36412e61adba0e6d262772"
+        },
+        {
+          "id": "airpods-max",
+          "name": "AirPods Max",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods Max",
+          "match": {
+            "name_regex": "(?i)AirPods Max",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 5,
+            "injectable": 2,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods-max.json",
+          "sha256": "f0c05b567840fbd707791e152306ed96bfb1ea07038306f694abfb8f44e79529"
+        },
+        {
           "id": "airpods-pro-2",
           "name": "AirPods Pro 2",
           "schema_version": 4,
-          "revision": 9,
+          "revision": 10,
+          "name_regex": "(?i)airpods pro",
           "match": {
             "name_regex": "(?i)airpods pro",
             "service_uuids_any": [
@@ -210,7 +314,55 @@
             "verified": 8
           },
           "url": "manifests/apple/airpods-pro-2.json",
-          "sha256": "a5922fdb668fbf491a789f5519f236739e3e5575073ff3e00668bae2c5c2024b"
+          "sha256": "b0063d5db620da5ac30c36a5b489efe258e0c82e8971cf9c323f7d6d1e00fab1"
+        },
+        {
+          "id": "airpods-pro",
+          "name": "AirPods Pro",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods Pro(?! 2)",
+          "match": {
+            "name_regex": "(?i)AirPods Pro(?! 2)",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 5,
+            "injectable": 2,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods-pro.json",
+          "sha256": "772817e556de070479c585de9e1377f483759549bb984c1dcb9cc9b874623a54"
+        },
+        {
+          "id": "airpods",
+          "name": "AirPods (1st/2nd Gen)",
+          "schema_version": 4,
+          "revision": 1,
+          "name_regex": "(?i)AirPods(?! (Pro|Max|3|4))",
+          "match": {
+            "name_regex": "(?i)AirPods(?! (Pro|Max|3|4))",
+            "service_uuids_any": [
+              "74ec2172-0bad-4d01-8f77-997b2be0722a"
+            ]
+          },
+          "transports": [
+            "aacp"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 4,
+            "injectable": 1,
+            "verified": 0
+          },
+          "url": "manifests/apple/airpods.json",
+          "sha256": "3b1591507a263aff3d08cc707ef0a7a4f5120e30869a9c8347814d023a738d42"
         }
       ]
     },
@@ -223,6 +375,7 @@
           "name": "Bose Noise Cancelling 700",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Bose NC700",
           "match": {
             "name_regex": "(?i)Bose NC700",
             "service_uuids_any": [
@@ -248,6 +401,7 @@
           "name": "Bose QuietComfort 35",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Bose QC35",
           "match": {
             "name_regex": "(?i)Bose QC35",
             "service_uuids_any": [
@@ -273,6 +427,7 @@
           "name": "Bose QuietComfort 45",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Bose QC45",
           "match": {
             "name_regex": "(?i)Bose QC45",
             "service_uuids_any": [
@@ -304,6 +459,7 @@
           "name": "Galaxy Buds Live",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds Live",
           "match": {
             "name_regex": "(?i)Galaxy Buds Live",
             "service_uuids_any": [
@@ -329,6 +485,7 @@
           "name": "Galaxy Buds+",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds\\+",
           "match": {
             "name_regex": "(?i)Galaxy Buds\\+",
             "service_uuids_any": [
@@ -354,6 +511,7 @@
           "name": "Galaxy Buds Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds Pro",
           "match": {
             "name_regex": "(?i)Galaxy Buds Pro",
             "service_uuids_any": [
@@ -379,6 +537,7 @@
           "name": "Galaxy Buds (2019)",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds(?! (Live|Pro|\\+|2|3))",
           "match": {
             "name_regex": "(?i)Galaxy Buds(?! (Live|Pro|\\+|2|3))",
             "service_uuids_any": [
@@ -404,6 +563,7 @@
           "name": "Galaxy Buds 2 Pro",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds2 Pro",
           "match": {
             "name_regex": "(?i)Galaxy Buds2 Pro",
             "service_uuids_any": [
@@ -429,6 +589,7 @@
           "name": "Galaxy Buds 2",
           "schema_version": 3,
           "revision": 1,
+          "name_regex": "(?i)Galaxy Buds2(?! Pro)",
           "match": {
             "name_regex": "(?i)Galaxy Buds2(?! Pro)",
             "service_uuids_any": [
@@ -460,6 +621,7 @@
           "name": "Shokz OpenSwim Pro",
           "schema_version": 3,
           "revision": 2,
+          "name_regex": "(?i)(OpenSwim Pro|Shokz.OpenSwim.Pro)",
           "match": {
             "name_regex": "(?i)(OpenSwim Pro|Shokz.OpenSwim.Pro)",
             "service_uuids_any": [

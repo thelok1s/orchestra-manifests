@@ -76,6 +76,7 @@ export function buildIndex(repoRoot, opts = {}) {
       name: m.name,
       schema_version: m.schema_version,
       revision: m.revision,
+      name_regex: m.match?.name_regex ?? null,
       match: m.match,
       transports: [...new Set(Object.values(m.channels).map(c => c.transport))],
       platforms: m.platforms ? Object.keys(m.platforms) : [],
