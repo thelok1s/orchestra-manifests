@@ -26,6 +26,7 @@ from the cloud index (refreshed on a TTL) and from a local sideload if present.
 | `revision_date` | string | no | ISO 8601 date of the last revision (`YYYY-MM-DD`). |
 | `id` | string | yes | Stable kebab-case slug; also the filename stem. |
 | `name` | string | yes | Human-readable display name. |
+| `device_type` | string | no | Physical form factor (real hardware type, not an icon name), drives the app's Devices-list icon. One of `speaker`, `headphones` (over/on-ear; default), `neckband` (cabled / open-ear, not TWS — e.g. Shokz, Sony WI-series), `tws` (true-wireless earbuds), `headset` (dedicated boom mic / gaming). When absent, the app infers from a clue — a per-bud (multi-component) `battery` layout implies `tws` — else falls back to `headphones`. (The app also accepts the older aliases `earbuds`→neckband, `earbuds_2`→tws.) |
 | `manufacturer` | string | yes | Manufacturer display name (e.g. `"Anker / Soundcore"`). |
 | `model_code` | string | no | Vendor model code (e.g. `"3062"`). |
 | `re_model` | string | no | Matching OpenSCQ30 model code for provenance (may differ from `model_code`). |
@@ -204,12 +205,38 @@ per option/state and the app replays it verbatim (patching only a rolling seq by
 
 ## read
 
+The app reads the device's **current** value for a function and pre-checks its control (segment or
+switch) accordingly, so the About page and volume-panel tile reflect reality instead of a default.
+A control with no usable `read` block stays optimistic (shows the last value it set/knew).
+
 | field | meaning |
 |---|---|
-| `command` | Hex command id to send as a read request. |
-| `response_command` | Hex command id to match in the device reply. |
-| `state_byte_index` | Byte offset in the full response packet holding the current value (`null` if unknown). |
-| `value_map` | Maps hex byte → option id or `on`/`off`. |
+| `command` | Hex command id sent as a read request. Functions that share a `command` are read **once** and decoded together (many Soundcore controls report in a single `0101` status packet). |
+| `response_command` | Hex command id to match in the device reply. Defaults to `command`. |
+| `state_byte_index` | Byte offset — **relative to the start of the matched response packet** — of the byte holding this function's value. `null` when the value can't be read from a single byte (use `match`, or leave unread). |
+| `value_map` | Maps that byte (2-hex-digit, lowercase) → option id (`multitoggle`/`list`) or `on`/`off` (`toggle`). A byte not in the map decodes to "unknown" and the control keeps its optimistic value. |
+| `match` | For values that need **more than one byte** to identify (e.g. ANC vs Adaptive differ in two bytes). An ordered array of rules; the first whose bytes all hold wins. See below. Use `match` **or** `state_byte_index`+`value_map`, not both. |
+
+### Multi-byte `match`
+
+```json
+"read": {
+  "command": "0101", "response_command": "0101",
+  "match": [
+    { "option": "adaptive",     "bytes": { "78": "00", "81": "01" } },
+    { "option": "anc",          "bytes": { "78": "00", "81": "00" } },
+    { "option": "transparency", "bytes": { "78": "01" } },
+    { "option": "off",          "bytes": { "78": "02" } }
+  ]
+}
+```
+
+Each rule's `bytes` maps a response-relative index → expected 2-hex-digit value; **all** must hold for
+the rule to match. List more-specific rules (more bytes) first.
+
+> **Verifying offsets on hardware.** Read a baseline status packet, flip the control, read again, and
+> diff — the single changed byte is the `state_byte_index` and its two values populate `value_map`.
+> Only flip to `_verified: true` once confirmed live.
 
 ---
 

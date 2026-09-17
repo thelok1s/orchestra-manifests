@@ -2,6 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildIndex, appNormalize } from './build-index.mjs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -16,7 +17,14 @@ test('buildIndex groups by manufacturer dir and digests devices', () => {
   const sop = anker.devices.find(d => d.id === 'soundcore-space-one-pro');
   assert.ok(sop, 'space one pro present');
   assert.equal(sop.schema_version, 3);
-  assert.equal(sop.revision, 2); // bumped when live-verified toggle read offsets were added (2026-07-10)
+  // The index must carry through whatever the manifest declares. Pinning a literal here meant
+  // every legitimate revision bump broke CI — it did, when the generic 66666666-… UUID was
+  // dropped from this manifest's match rule (rev 3, 2026-09-17). Compare against the manifest
+  // on disk instead, and keep a floor so an accidental reset is still caught.
+  const sopManifest = JSON.parse(readFileSync(
+    join(repoRoot, 'manifests/anker-soundcore/soundcore-space-one-pro.json'), 'utf8'));
+  assert.equal(sop.revision, sopManifest.revision);
+  assert.ok(sop.revision >= 3, 'revision must not go backwards');
   assert.deepEqual(sop.transports, ['rfcomm']);
   assert.deepEqual(sop.platforms, ['pixelos']);
   assert.match(sop.sha256, /^[0-9a-f]{64}$/);

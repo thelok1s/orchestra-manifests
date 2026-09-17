@@ -1,6 +1,6 @@
 {
   "index_schema": 1,
-  "generated": "2026-07-11T00:22:53.202Z",
+  "generated": "2026-09-16T21:09:14.663Z",
   "repo": "orchestra-manifests",
   "manufacturers": [
     {
@@ -10,6 +10,7 @@
         {
           "id": "soundcore-liberty-3-pro",
           "name": "Soundcore Liberty 3 Pro",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -35,6 +36,7 @@
         {
           "id": "soundcore-liberty-4-pro",
           "name": "Soundcore Liberty 4 Pro",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -60,6 +62,7 @@
         {
           "id": "soundcore-life-q30",
           "name": "Soundcore Life Q30",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -85,6 +88,7 @@
         {
           "id": "soundcore-life-q35",
           "name": "Soundcore Life Q35",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -110,6 +114,7 @@
         {
           "id": "soundcore-space-a40",
           "name": "Soundcore Space A40",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -135,14 +140,15 @@
         {
           "id": "soundcore-space-one-pro",
           "name": "Soundcore Space One Pro",
+          "device_type": "headphones",
           "schema_version": 3,
-          "revision": 2,
+          "revision": 3,
           "match": {
             "name_regex": "(?i)soundcore Space One Pro",
             "service_uuids_any": [
-              "0cf12d31-fac3-4553-bd80-d6832e7b3062",
-              "66666666-6666-6666-6666-666666666666"
-            ]
+              "0cf12d31-fac3-4553-bd80-d6832e7b3062"
+            ],
+            "_uuid_note": "66666666-6666-6666-6666-666666666666 removed 2026-09-17: it is a generic vendor UUID also advertised by BBK (OnePlus/OPPO/realme) buds, so it mis-matched a realme Buds Air8 Pro onto this manifest. The model-specific 0cf12d31-...3062 UUID is sufficient."
           },
           "transports": [
             "rfcomm"
@@ -156,11 +162,12 @@
             "verified": 10
           },
           "url": "manifests/anker-soundcore/soundcore-space-one-pro.json",
-          "sha256": "52b8db3f58fd8af0c14ce1a5e30017e18a20fcfe79cf4a7a70c305c9201c13a4"
+          "sha256": "ab19e1e13cb11c3f60d38e27a40d6fc7d7389ac35fb66f8b7cd862ab27bb27cd"
         },
         {
           "id": "soundcore-space-q45",
           "name": "Soundcore Space Q45",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -192,6 +199,7 @@
         {
           "id": "airpods-3",
           "name": "AirPods 3",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 2,
           "match": {
@@ -215,6 +223,7 @@
         {
           "id": "airpods-4-anc",
           "name": "AirPods 4 (ANC)",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 2,
           "match": {
@@ -238,6 +247,7 @@
         {
           "id": "airpods-4",
           "name": "AirPods 4",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 2,
           "match": {
@@ -261,6 +271,7 @@
         {
           "id": "airpods-max",
           "name": "AirPods Max",
+          "device_type": "headphones",
           "schema_version": 4,
           "revision": 1,
           "match": {
@@ -284,6 +295,7 @@
         {
           "id": "airpods-pro-2",
           "name": "AirPods Pro 2",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 10,
           "match": {
@@ -307,6 +319,7 @@
         {
           "id": "airpods-pro",
           "name": "AirPods Pro",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 2,
           "match": {
@@ -330,6 +343,7 @@
         {
           "id": "airpods",
           "name": "AirPods (1st/2nd Gen)",
+          "device_type": "tws",
           "schema_version": 4,
           "revision": 2,
           "match": {
@@ -353,12 +367,44 @@
       ]
     },
     {
+      "slug": "bbk",
+      "name": "realme",
+      "devices": [
+        {
+          "id": "realme-buds-air8-pro",
+          "name": "realme Buds Air8 Pro",
+          "device_type": "tws",
+          "schema_version": 3,
+          "revision": 1,
+          "match": {
+            "name_regex": "(?i)realme\\s*Buds\\s*Air8\\s*Pro",
+            "service_uuids_any": [
+              "0000079a-d102-11e1-9b23-00025b00a5a5"
+            ],
+            "manufacturer_id": "0x02b0"
+          },
+          "transports": [
+            "rfcomm"
+          ],
+          "platforms": [],
+          "counts": {
+            "capabilities": 1,
+            "injectable": 1,
+            "verified": 1
+          },
+          "url": "manifests/bbk/realme-buds-air8-pro.json",
+          "sha256": "9defe31a98688290b321e3d078e98af640841819725fe123a71ec989f8097cf2"
+        }
+      ]
+    },
+    {
       "slug": "bose",
       "name": "Bose",
       "devices": [
         {
           "id": "bose-nc700",
           "name": "Bose Noise Cancelling 700",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -384,6 +430,7 @@
         {
           "id": "bose-qc35",
           "name": "Bose QuietComfort 35",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -409,6 +456,7 @@
         {
           "id": "bose-qc45",
           "name": "Bose QuietComfort 45",
+          "device_type": "headphones",
           "schema_version": 3,
           "revision": 1,
           "match": {
@@ -440,6 +488,7 @@
         {
           "id": "galaxy-buds-live",
           "name": "Galaxy Buds Live",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -465,6 +514,7 @@
         {
           "id": "galaxy-buds-plus",
           "name": "Galaxy Buds+",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -490,6 +540,7 @@
         {
           "id": "galaxy-buds-pro",
           "name": "Galaxy Buds Pro",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -515,6 +566,7 @@
         {
           "id": "galaxy-buds",
           "name": "Galaxy Buds (2019)",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -540,6 +592,7 @@
         {
           "id": "galaxy-buds2-pro",
           "name": "Galaxy Buds 2 Pro",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -565,6 +618,7 @@
         {
           "id": "galaxy-buds2",
           "name": "Galaxy Buds 2",
+          "device_type": "tws",
           "schema_version": 3,
           "revision": 2,
           "match": {
@@ -596,6 +650,7 @@
         {
           "id": "shokz-openswim-pro",
           "name": "Shokz OpenSwim Pro",
+          "device_type": "neckband",
           "schema_version": 3,
           "revision": 3,
           "match": {

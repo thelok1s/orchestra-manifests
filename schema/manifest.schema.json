@@ -36,6 +36,19 @@
     "name": {
       "type": "string"
     },
+    "device_type": {
+      "type": "string",
+      "enum": [
+        "speaker",
+        "headphones",
+        "neckband",
+        "tws",
+        "headset",
+        "earbuds",
+        "earbuds_2",
+        "headset_mic"
+      ]
+    },
     "manufacturer": {
       "type": "string"
     },

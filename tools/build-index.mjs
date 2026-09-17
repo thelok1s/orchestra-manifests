@@ -74,6 +74,7 @@ export function buildIndex(repoRoot, opts = {}) {
     const entry = {
       id: m.id,
       name: m.name,
+      device_type: m.device_type || 'headphones', // form-factor icon; default when a manifest omits it
       schema_version: m.schema_version,
       revision: m.revision,
       match: m.match,
